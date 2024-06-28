@@ -1,4 +1,4 @@
-let itemsContainer = document.querySelector(".flex-container");
+let itemsContainer = document.querySelector(".items-container");
 const items = [
   {
     id: "001",
@@ -119,26 +119,46 @@ const items = [
     },
   },
 ];
+
 let innerHTML = "";
-items.forEach((item) => {
-  innerHTML += `<div class="item-container">
-          <a href="#"><img id="ima" class="catalog" src="${item.image}" /></a>
-          <div class="rating">${item.rating.stars} ⭐|${item.rating.count}
-          </div>
-          <div class="company-name"><${item.company}/div>
-          <div class="item-name">${item.item_name}</div>
-          <div class="price">
-            <span class="currentprice">Rs.${item.current_price}</span>
-            <span class="originalprice">Rs.${item.original_price}</span>
-            <span class="discount">${item.discount_percentage}%</span>
-          </div>
-          <button id="addBag" onclick="addToBag(${item})">Add to Bag</button>
+items.forEach((item,index) => {
+  innerHTML += `<div id=${index} class="item-container">
+  <a href="#"><img class="catalog" src="${item.image}" /></a>
+  <div class="rating">${item.rating.stars} ⭐|${item.rating.count}</div>
+  <div class="company-name">
+    ${item.company}</div>
+    <div class="item-name">${item.item_name}</div>
+    <div class="price">
+      <span class="currentprice">Rs.${item.current_price}</span>
+      <span class="originalprice">Rs.${item.original_price}</span>
+      <span class="discount">${item.discount_percentage}%</span>
+    </div>
+    <button id="addBag" onclick="addToBag(${item.id})">Add to Bag</button>
+  </div>
 </div>
+
 `;
 });
 
 itemsContainer.innerHTML = innerHTML;
 let bagItems = [];
-function addToBag() {
-  bagItems.push(item);
+disBagitem();
+let Itemstr = localStorage.getItem("bagItems");
+bagItems = Itemstr ? JSON.parse(Itemstr) : [];
+disBagitem();
+function addToBag(itemId) {
+  bagItems.push(itemId);
+  localStorage.setItem("bagItems", JSON.stringify(bagItems));
+  console.log(itemId);
+  disBagitem();
+}
+function disBagitem() {
+  let disBagitem = document.querySelector(".bag_item");
+  disBagitem.innerText = bagItems.length;
+  if (bagItems.length > 0) {
+    disBagitem.style.visibility = "visible";
+    disBagitem.innerText = bagItems.length;
+  } else {
+    disBagitem.style.visibility = "hidden";
+  }
 }

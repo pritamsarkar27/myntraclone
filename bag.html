@@ -3,8 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="index.css" />
-    <link
+    <link rel="stylesheet" href="bag.css" />
+    <link rel="stylesheet" href="index.css" />    <link
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
     />
@@ -38,16 +38,43 @@
           <span class="material-symbols-outlined logo"> favorite </span>
           <span class="wishlist"> Wishlist </span>
         </div>
-        <a class="contain" href="bag.html">
+        <a class="contain">
           <span class="material-symbols-outlined logo"> shopping_bag </span>
-          <span class="bag"> Bag </span>
+          <span class="Bag"> Bag </span>
           <span class="bag_item">0</span>
-        </a>
         </div>
       </div>
     </header>
     <main>
-      <div class="items-container">
+      <div class="bag">
+        <div class="bagitem-contain">
+          <div class="bag-item-container">
+            <div class="item-left-part">
+              <img class="bag-item-img" src="images/1.jpg">
+            </div>
+            <div class="item-right-part">
+              <div class="company"><div>
+              <div class="item-name">$</div>
+              <div class="price-container">
+                <span class="current-price">Rs </span>
+                <span class="original-price">Rs </span>
+                <span class="discount-percentage"></span>
+              </div>
+              <div class="return-period">
+                <span class="return-period-days"></span> return available
+              </div>
+              <div class="delivery-details">
+                Delivery by
+                <span class="delivery-details-days"></span>
+              </div>
+            </div>
+        
+            </div>
+
+        </div>
+        <div class="bagSum">
+
+        </div>
       </div>
     </main>
     <footer>
@@ -92,7 +119,8 @@
 
 
 
-
     <script src="index.js"></script>
+    <script src="bag.js"></script>
+   
   </body>
 </html>
