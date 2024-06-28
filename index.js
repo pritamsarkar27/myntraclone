@@ -1,3 +1,34 @@
+let bagItems = [];
+onLoad();
+
+function onLoad(){
+  let Itemstr = localStorage.getItem("bagItems");
+  bagItems = Itemstr ? JSON.parse(Itemstr) : [];
+  disItem();
+  disBagitem();
+  }
+
+function addToBag(itemId) {
+  bagItems.push(itemId);
+  localStorage.setItem("bagItems", JSON.stringify(bagItems));
+  console.log(itemId);
+  disBagitem();
+}
+
+
+function disBagitem() {
+  let disBagitem = document.querySelector(".bag_item");
+  disBagitem.innerText = bagItems.length;
+  if (bagItems.length > 0) {
+    disBagitem.style.visibility = "visible";
+    disBagitem.innerText = bagItems.length;
+  } else {
+    disBagitem.style.visibility = "hidden";
+  }
+}
+
+
+function disItem(){
 let itemsContainer = document.querySelector(".items-container");
 const items = [
   {
@@ -119,7 +150,10 @@ const items = [
     },
   },
 ];
-
+if(!itemsContainer){
+  return;
+}
+console.log(itemsContainer);
 let innerHTML = "";
 items.forEach((item,index) => {
   innerHTML += `<div id=${index} class="item-container">
@@ -136,29 +170,10 @@ items.forEach((item,index) => {
     <button id="addBag" onclick="addToBag(${item.id})">Add to Bag</button>
   </div>
 </div>
-
 `;
 });
-
 itemsContainer.innerHTML = innerHTML;
-let bagItems = [];
-disBagitem();
-let Itemstr = localStorage.getItem("bagItems");
-bagItems = Itemstr ? JSON.parse(Itemstr) : [];
-disBagitem();
-function addToBag(itemId) {
-  bagItems.push(itemId);
-  localStorage.setItem("bagItems", JSON.stringify(bagItems));
-  console.log(itemId);
-  disBagitem();
 }
-function disBagitem() {
-  let disBagitem = document.querySelector(".bag_item");
-  disBagitem.innerText = bagItems.length;
-  if (bagItems.length > 0) {
-    disBagitem.style.visibility = "visible";
-    disBagitem.innerText = bagItems.length;
-  } else {
-    disBagitem.style.visibility = "hidden";
-  }
-}
+
+
+
