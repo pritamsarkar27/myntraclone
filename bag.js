@@ -300,7 +300,6 @@ function displayBagItems() {
             },
         },
     ];
-
     let containEle = document.querySelector(".bagitem-contain");
     let innerHTML = '';
     bagitemObject.forEach(bagItem => {
