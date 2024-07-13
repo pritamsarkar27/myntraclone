@@ -9,7 +9,7 @@ const items = [{
         current_price: 606,
         discount_percentage: 42,
         return_period: 14,
-        delivery_date: "10 Oct 2023",
+        delivery_date: "10 Oct 2024",
         rating: {
             stars: 4.5,
             count: 1400,
@@ -24,7 +24,7 @@ const items = [{
         current_price: 1507,
         discount_percentage: 42,
         return_period: 14,
-        delivery_date: "10 Oct 2023",
+        delivery_date: "10 Oct 2024",
         rating: {
             stars: 4.3,
             count: 24,
@@ -39,7 +39,7 @@ const items = [{
         current_price: 495,
         discount_percentage: 69,
         return_period: 14,
-        delivery_date: "10 Oct 2023",
+        delivery_date: "10 Oct 2024",
         rating: {
             stars: 4.1,
             count: 249,
@@ -54,7 +54,7 @@ const items = [{
         current_price: 999,
         discount_percentage: 0,
         return_period: 14,
-        delivery_date: "10 Oct 2023",
+        delivery_date: "10 Oct 2024",
         rating: {
             stars: 5.0,
             count: 10,
@@ -69,7 +69,7 @@ const items = [{
         current_price: 489,
         discount_percentage: 65,
         return_period: 14,
-        delivery_date: "10 Oct 2023",
+        delivery_date: "10 Oct 2024",
         rating: {
             stars: 4.2,
             count: 3500,
@@ -84,7 +84,7 @@ const items = [{
         current_price: 14995,
         discount_percentage: 0,
         return_period: 14,
-        delivery_date: "10 Oct 2023",
+        delivery_date: "10 Oct 2024",
         rating: {
             stars: 0.0,
             count: 0,
@@ -112,7 +112,7 @@ const items = [{
         current_price: 142,
         discount_percentage: 50,
         return_period: 14,
-        delivery_date: "10 Oct 2023",
+        delivery_date: "10 Oct 2024",
         rating: {
             stars: 4.2,
             count: 5200,
@@ -122,7 +122,7 @@ const items = [{
 onLoad();
 
 function onLoad() {
-    loadBagItems()
+    loadBagItems();
     displayBagItems();
     displayBagSum();
 }
@@ -132,14 +132,14 @@ function displayBagSum() {
     let totalMRP = 0;
     let totalDiscount = 0;
 
-    bagitemObject.forEach(bagItem => {
+    bagitemObject.forEach((bagItem) => {
         totalMRP += bagItem.original_price;
         totalDiscount += bagItem.original_price - bagItem.current_price;
     });
 
     let finalPayment = totalMRP - totalDiscount + CONVENIENCE_FEES;
 
-    let bagSumele = document.querySelector('.bagSum');
+    let bagSumele = document.querySelector(".bagSum");
     bagSumele.innerHTML = `<div class="bag-details-container">
     <div class="price-header">PRICE DETAILS (${totalItem} Items) </div>
     <div class="price-item">
@@ -164,13 +164,11 @@ function displayBagSum() {
     <div class="css-xjhrni">PLACE ORDER</div>
   </button>
   `;
-
 }
 
-
 function loadBagItems() {
-    console.log(bagItems)
-    bagitemObject = bagItems.map(itemId => {
+    console.log(bagItems);
+    bagitemObject = bagItems.map((itemId) => {
         for (let i = 0; i < items.length; i++) {
             if (itemId == items[i].id) {
                 return items[i];
@@ -300,6 +298,7 @@ function displayBagItems() {
             },
         },
     ];
+
     let containEle = document.querySelector(".bagitem-contain");
     let innerHTML = '';
     bagitemObject.forEach(bagItem => {
@@ -309,35 +308,40 @@ function displayBagItems() {
 }
 
 function removeFromBag(itemId) {
-    bagItems = bagItems.filter(bagitemId => bagitemId != itemId);
+    bagItems = bagItems.filter((bagitemId) => bagitemId != itemId);
     localStorage.setItem("bagItems", JSON.stringify(bagItems));
     loadBagItems();
     displayBagItems();
-    disBagitem()
+    disBagitem();
 }
 
-function generateItemHtml(item) {
-    return `<div class="bag-item-container">
-            <div class="item-left-part">
-              <img class="bag-item-img" src="${item.image}">
-            </div>
-            <div class="item-right-part">
-              <div class="company">${item.company}<div>
-              <div class="item-name">${item.item_name}</div>
-              <div class="price-container">
-                <span class="current-price">Rs ${item.current_price}</span>
-                <span class="original-price">Rs${item.original_price} </span>
-                <span class="discount-percentage">(${item.discount_percentage})% OFF</span>
-              </div>
-              <div class="return-period">
-                <span class="return-period-days">${item.return_period}</span> return available
-              </div>
-              <div class="delivery-details">
-                Delivery by
-                <span class="delivery-details-days">${item.delivery_date}</span>
-              </div>
-            </div>
-             <div class="remove-from-cart" onclick="removeFromBag(${item.id})">X</div>
-             </div>`
-
+function generateItemHtml(item, idx) {
+    return `<div class="bag-item-container" id=${idx}>
+  <div class="item-left-part">
+    <img class="bag-item-img" src="${item.image}" />
+  </div>
+  <div class="item-right-part">
+    <div class="company">
+      ${item.company}</div>
+      <div>
+        <div class="item-name">${item.item_name}</div>
+        <div class="price-container">
+          <span class="current-price">Rs ${item.current_price}</span>
+          <span class="original-price">Rs${item.original_price} </span>
+          <span class="discount-percentage"
+            >(${item.discount_percentage})% OFF</span
+          >
+        </div>
+        <div class="return-period">
+          <span class="return-period-days">${item.return_period}</span> return
+          available
+        </div>
+        <div class="delivery-details">
+          Delivery by
+          <span class="delivery-details-days">${item.delivery_date}</span>
+        </div>
+      </div>
+      <div class="remove-from-cart" onclick="removeFromBag(${item.id})">X</div>
+    </div>
+</div>`;
 }
