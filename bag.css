@@ -84,7 +84,7 @@ main{
 
 .item-left-part {
     display: flex;
-    /* position: absolute; */
+        
     background: rgb(255, 242, 223);
     height: 148px;
     width: 111px;
